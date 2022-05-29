@@ -3,24 +3,28 @@ const CustomError = require('../errors')
 const db = require('../db')
 
 const getAllRestaurants = async (req, res) => {
-    const results = await db.query(`
-        select
-            r.*
-            , reviews.number_of_reviews
-            , reviews.average_rating
+    try {
+        const results = await db.query(`
+            select
+                r.*
+                , reviews.number_of_reviews
+                , reviews.average_rating
 
-        from restaurants r
+            from restaurants r
 
-        left join (select restaurant_id, trunc(AVG(rating),2) as average_rating, count(id) as number_of_reviews from reviews group by 1) as reviews
-            on r.id = reviews.restaurant_id
-    `)
-    res.status(StatusCodes.OK).json({
-        status: "success",
-        results: results.rows.length,
-        data: {
-            restaurants: results.rows
-        }
-    })
+            left join (select restaurant_id, trunc(AVG(rating),2) as average_rating, count(id) as number_of_reviews from reviews group by 1) as reviews
+                on r.id = reviews.restaurant_id
+        `)
+        res.status(StatusCodes.OK).json({
+            status: "success",
+            results: results.rows.length,
+            data: {
+                restaurants: results.rows
+            }
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 const getSingleRestaurant = async (req, res) => {
