@@ -1,5 +1,5 @@
 import axios from "axios"
 
 export default axios.create({
-    baseURL: "http://localhost:5002/api/v1/restaurants"
+    baseURL: "https://restaurant-finder-reno.herokuapp.com/api/v1/restaurants"
 });
