@@ -23,12 +23,12 @@ function UpdateRestaurant(props) {
             }
         }
         fetchData();
-    }, [])
+    }, [id])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await RestaurantFinder.put(`/${id}`, {
+            await RestaurantFinder.put(`/${id}`, {
                 name,
                 location,
                 price_range: priceRange

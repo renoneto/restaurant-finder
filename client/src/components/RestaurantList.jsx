@@ -17,7 +17,7 @@ const RestaurantList = (props) => {
             }
         }
         fetchData();
-    }, [])
+    }, [setRestaurants])
 
     const handleDelete = async (e, id) => {
         e.stopPropagation()

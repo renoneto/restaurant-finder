@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useParams } from "react-router-dom"
 import RestaurantFinder from '../apis/RestaurantFinder'
 import AddReview from '../components/AddReview'
@@ -22,7 +22,7 @@ function RestaurantDetail() {
             }
         }
         fetchData();
-    }, [])
+    }, [id, setSelectedRestaurant])
 
     return (
         <div>
